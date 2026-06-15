@@ -1,0 +1,9 @@
+package io.github.shnaki.kmpwebview.ui.theme
+
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.Composable
+
+@Composable
+fun KmpWebViewTheme(content: @Composable () -> Unit) {
+    MaterialTheme(content = content)
+}

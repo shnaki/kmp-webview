@@ -1,0 +1,113 @@
+/* ── リセット & ベース ──────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+    --bg:       #0f172a;
+    --surface:  #1e293b;
+    --border:   #334155;
+    --accent:   #38bdf8;
+    --success:  #4ade80;
+    --error:    #f87171;
+    --text:     #e2e8f0;
+    --muted:    #94a3b8;
+    --radius:   12px;
+    --gap:      16px;
+}
+
+html, body {
+    height: 100%;
+    font-family: system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ── レイアウト ──────────────────────────────────────────────────────────── */
+.app {
+    display: flex;
+    flex-direction: column;
+    min-height: 100dvh;
+    padding: env(safe-area-inset-top) env(safe-area-inset-right)
+             env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+
+header {
+    padding: 20px var(--gap) 12px;
+    border-bottom: 1px solid var(--border);
+}
+header h1 { font-size: 1.2rem; font-weight: 700; color: var(--accent); }
+header p  { font-size: 0.8rem; color: var(--muted); margin-top: 2px; }
+
+main {
+    flex: 1;
+    padding: var(--gap);
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap);
+}
+
+/* ── 機能カード ──────────────────────────────────────────────────────────── */
+.card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+}
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px var(--gap);
+    border-bottom: 1px solid var(--border);
+}
+.card-header .icon { font-size: 1.4rem; }
+.card-header h2   { font-size: 1rem; font-weight: 600; }
+.card-body        { padding: var(--gap); display: flex; flex-direction: column; gap: 10px; }
+
+/* ── ボタン ──────────────────────────────────────────────────────────────── */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.15s, transform 0.1s;
+    background: var(--accent);
+    color: #0f172a;
+    width: 100%;
+}
+.btn:active { transform: scale(0.97); }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+/* ── 結果エリア ──────────────────────────────────────────────────────────── */
+.result {
+    min-height: 52px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    font-size: 0.85rem;
+    line-height: 1.5;
+    word-break: break-all;
+    color: var(--muted);
+}
+.result.ok    { border-color: var(--success); color: var(--success); }
+.result.error { border-color: var(--error);   color: var(--error);   }
+.result.busy  { color: var(--accent); }
+
+/* ── NFC レコードリスト ──────────────────────────────────────────────────── */
+.nfc-records { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.nfc-records li {
+    padding: 8px 10px;
+    background: var(--surface);
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    font-size: 0.82rem;
+}
+.nfc-records li .label { color: var(--muted); font-size: 0.75rem; }
+.nfc-records li .value { margin-top: 2px; word-break: break-all; }

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>KMP WebView Bridge デモ</title>
+    <link rel="stylesheet" href="style.css" />
+    <!-- bridge.js を先にロード（NativeBridge を app.js より前に初期化する） -->
+    <script src="bridge.js"></script>
+</head>
+<body>
+<div class="app">
+
+    <header>
+        <h1>KMP WebView Bridge</h1>
+        <p>Web ↔ ネイティブ機能ブリッジ デモ</p>
+    </header>
+
+    <main>
+
+        <!-- ── QR スキャン ────────────────────────────────────────────────── -->
+        <section class="card">
+            <div class="card-header">
+                <span class="icon">📷</span>
+                <h2>QR コードスキャン</h2>
+            </div>
+            <div class="card-body">
+                <button id="btn-qr" class="btn">QR をスキャン</button>
+                <div id="result-qr" class="result">結果がここに表示されます</div>
+            </div>
+        </section>
+
+        <!-- ── GPS 現在地 ──────────────────────────────────────────────────── -->
+        <section class="card">
+            <div class="card-header">
+                <span class="icon">📍</span>
+                <h2>GPS 現在地</h2>
+            </div>
+            <div class="card-body">
+                <button id="btn-gps" class="btn">現在地を取得</button>
+                <div id="result-gps" class="result">結果がここに表示されます</div>
+            </div>
+        </section>
+
+        <!-- ── NFC 読み取り ───────────────────────────────────────────────── -->
+        <section class="card">
+            <div class="card-header">
+                <span class="icon">📡</span>
+                <h2>NFC 読み取り（NDEF）</h2>
+            </div>
+            <div class="card-body">
+                <button id="btn-nfc" class="btn">NFC タグを読み取る</button>
+                <div id="result-nfc" class="result">結果がここに表示されます</div>
+            </div>
+        </section>
+
+    </main>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
