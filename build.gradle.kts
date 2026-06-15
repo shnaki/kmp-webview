@@ -1,5 +1,5 @@
 // Root build file: only applies plugins to subprojects (apply false).
-// All actual build logic lives in :shared and :androidApp.
+// All actual build logic lives in :shared and :app-android.
 plugins {
     alias(libs.plugins.android.application)    apply false
     alias(libs.plugins.android.library)        apply false

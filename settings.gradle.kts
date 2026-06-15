@@ -23,4 +23,4 @@ dependencyResolutionManagement {
 rootProject.name = "kmp-webview"
 
 include(":shared")
-include(":androidApp")
+include(":app-android")
