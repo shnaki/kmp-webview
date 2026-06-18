@@ -31,6 +31,14 @@ android {
     }
 
     buildFeatures { compose = true }
+
+    sourceSets {
+        getByName("main") {
+            // Web フロントエンド資産（Android/iOS 共通）を app-web/ から参照する。
+            // AGP がここを assets/ 直下にマージするため、APK 内は assets/index.html 等になる。
+            assets.srcDir(rootProject.file("app-web"))
+        }
+    }
 }
 
 kotlin {

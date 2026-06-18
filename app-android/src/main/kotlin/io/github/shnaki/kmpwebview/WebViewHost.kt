@@ -22,8 +22,8 @@ import kotlinx.coroutines.withContext
 /**
  * WebView を Compose でホストする薄いラッパー。
  *
- * - [WebViewAssetLoader] で `assets/web/` を
- *   `https://appassets.androidplatform.net/assets/web/` として HTTPS 配信
+ * - [WebViewAssetLoader] で `app-web/`（リポジトリ直下の共通 Web 資産）を
+ *   `https://appassets.androidplatform.net/assets/` として HTTPS 配信
  *   （WebMessageListener が HTTPS オリジンを要求するため file:// は使わない）
  *
  * - [WebViewCompat.addWebMessageListener] でブリッジチャネル "nativeBridge" を登録。
@@ -89,7 +89,7 @@ fun WebViewHost(bridgeRouter: BridgeRouter) {
                     }
                 )
 
-                loadUrl("https://appassets.androidplatform.net/assets/web/index.html")
+                loadUrl("https://appassets.androidplatform.net/assets/index.html")
             }
         }
     )
