@@ -1,5 +1,7 @@
 package io.github.shnaki.kmpwebview
 
+import android.content.ActivityNotFoundException
+import android.content.Intent
 import android.net.Uri
 import android.webkit.WebResourceRequest
 import android.webkit.WebResourceResponse
@@ -62,6 +64,26 @@ fun WebViewHost(bridgeRouter: BridgeRouter) {
                         view: WebView,
                         request: WebResourceRequest
                     ): WebResourceResponse? = assetLoader.shouldInterceptRequest(request.url)
+
+                    // バンドル以外の URL（Google Maps 等）は OS に委譲し、
+                    // WebView 内ではロードしない（INTERNET パーミッション不要を維持）。
+                    override fun shouldOverrideUrlLoading(
+                        view: WebView,
+                        request: WebResourceRequest
+                    ): Boolean {
+                        if (request.url.host == "appassets.androidplatform.net") {
+                            return false // バンドルアセットはそのまま WebView で処理
+                        }
+                        return try {
+                            val intent = Intent(Intent.ACTION_VIEW, request.url).apply {
+                                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                            }
+                            ctx.startActivity(intent)
+                            true
+                        } catch (_: ActivityNotFoundException) {
+                            false // 対応アプリがなければ WebView に任せる
+                        }
+                    }
                 }
 
                 // ブリッジ登録: JS → Native メッセージ受信
